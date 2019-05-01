@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Segment } from "semantic-ui-react";
+import { Segment, Header } from "semantic-ui-react";
 import axios from "axios";
 import { BACKEND, HELLO } from "../Constants/Routes";
 
@@ -33,7 +33,7 @@ class Hello extends Component
         const { message } = this.state;
 
         return (
-            <Segment style={{ textAlign: "center" }}>{message}</Segment>
+            <Segment style={{ textAlign: "center" }}><Header as="h1">{message}</Header></Segment>
         )
     }
 }
