@@ -4,8 +4,11 @@
   "description": "Creates MERN Template",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node main.js"
   },
   "author": "Fedora Dev <jimmy.satt@gmail.com>",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "inquirer": "^6.3.1"
+  }
 }

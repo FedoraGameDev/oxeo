@@ -1,3 +1,5 @@
+module.exports = {
+    build: vars => `
 const express = require("express");
 const db = require("./src/database"); //Required to initialize connection to DB
 const routes = require("./src/routes");
@@ -27,4 +29,5 @@ app.use("/api/hello", routes.hello);
 /* Serve application */
 ///////////////////////
 const port = process.env.PORT || 3001;
-app.listen(port, () => console.log(`Listening on port ${port}...`));
+app.listen(port, () => console.log(\`Listening on port ${ port}...\`));`
+}
