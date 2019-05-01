@@ -1,17 +1,20 @@
-import React from "react";
+import React, { Component } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Container } from "semantic-ui-react";
 import Hello from "./Components/Hello";
 
-function App()
+class App extends Component
 {
-	return (
-		<Container className="App">
-			<Router>
-				<Route path="/" component={Hello} />
-			</Router>
-		</Container>
-	);
+	render()
+	{
+		return (
+			<Container className="App">
+				<Router>
+					<Route path="/" component={Hello} />
+				</Router>
+			</Container>
+		);
+	}
 }
 
 export default App;
