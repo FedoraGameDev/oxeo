@@ -3,10 +3,10 @@ const models = require("../models");
 module.exports = {
     index: (req, res) =>
     {
-        models.Hello.find({})
-            .then(hellos =>
+        models.hello.findOne()
+            .then(hello =>
             {
-                res.json({ hellos: hellos });
+                res.json({ hello: hello });
             })
             .catch(error =>
             {

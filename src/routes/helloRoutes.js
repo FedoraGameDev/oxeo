@@ -4,4 +4,4 @@ const controllers = require("../controllers");
 const router = express.Router();
 
 module.exports = router
-    .post("/", controllers.hello.index)
+    .get("/", controllers.hello.index)

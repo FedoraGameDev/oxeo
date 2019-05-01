@@ -1,4 +1,5 @@
 const express = require("express");
+const db = require("./src/database"); //Required to initialize connection to DB
 const routes = require("./src/routes");
 const cors = require("cors");
 const bodyparser = require("body-parser");
@@ -14,7 +15,7 @@ app.use(express.json());
 //////////////////////////
 /* Apply website routes */
 //////////////////////////
-app.use("/hello", routes.hello);
+app.use("/api/hello", routes.hello);
 
 //////////////////////////////////
 /* Use frontend when it's built */
