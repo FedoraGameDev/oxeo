@@ -1,6 +1,6 @@
 {
   "name": "oxeo",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Single command MERN stack creation tool.",
   "main": "main.js",
   "scripts": {
