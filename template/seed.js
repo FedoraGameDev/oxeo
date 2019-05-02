@@ -1,4 +1,5 @@
-const db = require("./src/database"); //Required to initialize connection to DB
+module.exports = {
+    build: vars => `const db = require("./src/database"); //Required to initialize connection to DB
 const models = require("./src/models");
 
 console.log("Defining seed...");
@@ -46,4 +47,5 @@ async function Exit()
 }
 
 console.log("Starting seed...");
-seed();
+seed();`
+}

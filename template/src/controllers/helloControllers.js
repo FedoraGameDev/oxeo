@@ -1,4 +1,6 @@
-const models = require("../models");
+module.exports = {
+	build: vars =>
+		`const models = require("../models");
 
 module.exports = {
     index: (req, res) =>
@@ -14,4 +16,6 @@ module.exports = {
                 res.status(500).json({ ERROR: error });
             });
     }
-};
+};`
+}
+

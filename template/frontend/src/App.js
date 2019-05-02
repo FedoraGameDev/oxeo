@@ -1,4 +1,5 @@
-import React, { Component } from "react";
+module.exports = {
+	build: vars => `import React, { Component } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Container, Segment } from "semantic-ui-react";
 import Navigation from "./Components/Navigation";
@@ -23,4 +24,5 @@ class App extends Component
 	}
 }
 
-export default App;
+export default App;`
+}

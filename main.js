@@ -5,6 +5,26 @@ const proj_dir = fullDir[fullDir.length - 1];
 
 const packageTemplate = require("./template/package");
 const serverTemplate = require("./template/server");
+const databaseTemplate = require("./template/src/database");
+const controllersTemplate = require("./template/src/controllers/helloControllers");
+const controllersIndexTemplate = require("./template/src/controllers/index");
+const modelsTemplate = require("./template/src/models/helloModel");
+const modelsIndexTemplate = require("./template/src/models/index");
+const routesTemplate = require("./template/src/routes/helloRoutes");
+const routesIndexTemplate = require("./template/src/routes/index");
+const seedTemplate = require("./template/seed");
+const readmeTemplate = require("./template/readme");
+
+const frontPackageTemplate = require("./template/frontend/package");
+const frontPubIndexTemplate = require("./template/frontend/public/index");
+const frontManifestTemplate = require("./template/frontend/public/manifest");
+const frontAppTemplate = require("./template/frontend/src/App");
+const frontIndexTemplate = require("./template/frontend/src/index");
+const frontServiceWorkerTemplate = require("./template/frontend/src/serviceWorker");
+const frontIndexScssTemplate = require("./template/frontend/src/index_scss");
+const frontRoutesTemplate = require("./template/frontend/src/Constants/Routes");
+const frontHelloTemplate = require("./template/frontend/src/Components/Hello");
+const frontNavigationTemplate = require("./template/frontend/src/Components/Navigation");
 
 const proj_questions = [
     { type: "input", name: "name", message: `Package name (${proj_dir})` },
@@ -32,6 +52,37 @@ const proj_answer_defaults = {
     db: proj_dir
 }
 
+writeFile = (file, data) =>
+{
+    fs.writeFile(file, data, error => console.log(error || `${file} created.`));
+}
+
+async function writeFiles(dir, proj_answers, packageJson)
+{
+    await writeFile(`${dir}/package.json`, packageJson);
+    await writeFile(`${dir}/${proj_answers.main}`, serverTemplate.build(proj_answers));
+    await writeFile(`${dir}/src/database.js`, databaseTemplate.build(proj_answers));
+    await writeFile(`${dir}/src/controllers/helloControllers.js`, controllersTemplate.build(proj_answers));
+    await writeFile(`${dir}/src/controllers/index.js`, controllersIndexTemplate.build(proj_answers));
+    await writeFile(`${dir}/src/models/helloModels.js`, modelsTemplate.build(proj_answers));
+    await writeFile(`${dir}/src/models/index.js`, modelsIndexTemplate.build(proj_answers));
+    await writeFile(`${dir}/src/routes/helloRoutes.js`, routesTemplate.build(proj_answers));
+    await writeFile(`${dir}/src/routes/index.js`, routesIndexTemplate.build(proj_answers));
+    await writeFile(`${dir}/seed.js`, seedTemplate.build(proj_answers));
+    await writeFile(`${dir}/readme.md`, readmeTemplate.build(proj_answers));
+
+    await writeFile(`${dir}/frontend/package.json`, frontPackageTemplate.build(proj_answers));
+    await writeFile(`${dir}/frontend/public/index.html`, frontPubIndexTemplate.build(proj_answers));
+    await writeFile(`${dir}/frontend/public/manifest.json`, frontManifestTemplate.build(proj_answers));
+    await writeFile(`${dir}/frontend/src/App.js`, frontAppTemplate.build(proj_answers));
+    await writeFile(`${dir}/frontend/src/index.js`, frontIndexTemplate.build(proj_answers));
+    await writeFile(`${dir}/frontend/src/serviceWorker.js`, frontServiceWorkerTemplate.build(proj_answers));
+    await writeFile(`${dir}/frontend/src/index.scss`, frontIndexScssTemplate.build(proj_answers));
+    await writeFile(`${dir}/frontend/src/Constants/Routes.js`, frontRoutesTemplate.build(proj_answers));
+    await writeFile(`${dir}/frontend/src/Components/Hello.js`, frontHelloTemplate.build(proj_answers));
+    await writeFile(`${dir}/frontend/src/Components/Navigation.js`, frontNavigationTemplate.build(proj_answers));
+}
+
 inquirer.prompt(proj_questions)
     .then(proj_answers =>
     {
@@ -44,6 +95,7 @@ inquirer.prompt(proj_questions)
         proj_answers.main = proj_answers.main || proj_answer_defaults.main;
         proj_answers.author = proj_answers.author || proj_answer_defaults.author;
         proj_answers.license = proj_answers.license || proj_answer_defaults.license;
+        proj_answers.db = proj_answers.db || proj_answer_defaults.db;
 
         const packageJson = packageTemplate.build(proj_answers);
 
@@ -58,11 +110,24 @@ Is this OK? (yes)`
         inquirer.prompt([{ type: "input", name: "confirmation", message: proj_confirmation }])
             .then(proj_conf_answer =>
             {
-                proj_conf_answer = proj_conf_answer === "" ? "yes" : proj_conf_answer;
+                proj_conf_answer.confirmation = proj_conf_answer.confirmation === "" ? "yes" : proj_conf_answer.confirmation;
 
-                if (proj_conf_answer === "yes")
+                if (proj_conf_answer.confirmation === "yes")
                 {
-                    fs.writeFile("./package.json", packageJson, error => console.log(error || "package.json created."));
+                    console.log("Creating file structure...");
+                    if (!fs.existsSync("./src")) fs.mkdirSync("./src");
+                    if (!fs.existsSync("./src/controllers")) fs.mkdirSync("./src/controllers");
+                    if (!fs.existsSync("./src/models")) fs.mkdirSync("./src/models");
+                    if (!fs.existsSync("./src/routes")) fs.mkdirSync("./src/routes");
+                    if (!fs.existsSync("./frontend")) fs.mkdirSync("./frontend");
+                    if (!fs.existsSync("./frontend/public")) fs.mkdirSync("./frontend/public");
+                    if (!fs.existsSync("./frontend/src")) fs.mkdirSync("./frontend/src");
+                    if (!fs.existsSync("./frontend/src/Components")) fs.mkdirSync("./frontend/src/Components");
+                    if (!fs.existsSync("./frontend/src/Constants")) fs.mkdirSync("./frontend/src/Constants");
+                    console.log("File structure created.");
+
+                    console.log("Writing files...");
+                    writeFiles(fullDir.join("/"), proj_answers, packageJson);
                 }
             })
             .catch(error =>

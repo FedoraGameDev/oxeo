@@ -1,5 +1,7 @@
-const mongoose = require("mongoose");
-const database = "templatedatabase";
+module.exports = {
+    build: vars =>
+        `const mongoose = require("mongoose");
+const database = "${vars.db}";
 const server = "localhost:27017";
 
 class Database
@@ -11,7 +13,7 @@ class Database
 
     _connect()
     {
-        mongoose.connect((process.env.MONGODB_URI) || (`mongodb://${server}/${database}`), { useNewUrlParser: true })
+        mongoose.connect((process.env.MONGODB_URI) || (\`mongodb://\${server}/\${database}\`), { useNewUrlParser: true })
             .then(() =>
             {
                 console.log("Database connection successful.");
@@ -23,4 +25,5 @@ class Database
     }
 }
 
-module.exports = new Database();
+module.exports = new Database();`
+}

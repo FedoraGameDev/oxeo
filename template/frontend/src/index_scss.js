@@ -1,4 +1,5 @@
-body {
+module.exports = {
+	build: vars => `body {
 	margin: 0;
 	padding: 0;
 	height: 100%;
@@ -32,4 +33,5 @@ pre {
 
 .ui.inverted.menu  .active.item {
 	background-color: transparent !important;
+}`
 }

@@ -1,10 +1,11 @@
-import React, { Component } from "react";
+module.exports = {
+    build: vars => `import React, { Component } from "react";
 import { Segment, Header } from "semantic-ui-react";
 import axios from "axios";
 import { BACKEND, HELLO } from "../Constants/Routes";
 
 const INITIAL_STATE = {
-    message: "defsdf"
+    message: ""
 }
 
 class Hello extends Component
@@ -17,7 +18,7 @@ class Hello extends Component
 
     componentDidMount()
     {
-        axios.get(`${BACKEND}${HELLO}`)
+        axios.get(\`\${ BACKEND } \${ HELLO }\`)
             .then(res =>
             {
                 this.setState({ message: res.data.hello.message });
@@ -38,4 +39,5 @@ class Hello extends Component
     }
 }
 
-export default Hello;
+export default Hello;`
+}

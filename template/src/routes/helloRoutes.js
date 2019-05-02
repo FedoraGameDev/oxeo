@@ -1,7 +1,9 @@
-const express = require("express");
+module.exports = {
+    build: vars => `const express = require("express");
 const controllers = require("../controllers");
 
 const router = express.Router();
 
 module.exports = router
-    .get("/", controllers.hello.index)
+    .get("/", controllers.hello.index)`
+}

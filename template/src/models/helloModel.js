@@ -1,4 +1,5 @@
-const mongoose = require("mongoose");
+module.exports = {
+    build: vars => `const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const HelloSchema = new Schema({
@@ -6,4 +7,5 @@ const HelloSchema = new Schema({
 });
 
 const Hello = mongoose.model("Hello", HelloSchema);
-module.exports = Hello;
+module.exports = Hello;`
+}

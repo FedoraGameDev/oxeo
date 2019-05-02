@@ -3,14 +3,14 @@ module.exports = {
 	{
 		return (
 			`{
-    "name": "${vars.name}",
-    "version": "${vars.version}",
-    "description": "${vars.description}",
-    "main": "${vars.main}",
-    "scripts": {
-      "start": "node .",
-      "dev": "nodemon .",
-      "test": "${vars.test || "echo \\\"Error: no test specified\\\" && exit 1"}"
+	"name": "${vars.name}",
+	"version": "${vars.version}",
+	"description": "${vars.description}",
+	"main": "${vars.main}",
+	"scripts": {
+		"start": "node .",
+		"dev": "nodemon ."${vars.test ? `,
+		"test": "${vars.test}"` : ""}
 	},
     ${vars.git ? `"git": "${vars.git}",` : ""
 				}
@@ -18,7 +18,12 @@ module.exports = {
 		${vars.keywords.split(" ").map(word => (`"${word}"`))}
 	]` : ""}
 	"author": "${vars.author}",
-	"license": "${vars.license}"
+	"license": "${vars.license}",
+	"dependencies": {
+		"cors": "^2.8.5",
+		"express": "^4.16.4",
+		"mongoose": "^5.5.5"
+	}
 }`.replace("\n    \n", "\n").replace("\n    \n", "\n")
 		);
 	}

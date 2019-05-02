@@ -1,4 +1,5 @@
-import React, { Component } from "react";
+module.exports = {
+    build: vars => `import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { Menu, Icon } from "semantic-ui-react";
 
@@ -53,4 +54,5 @@ class Navigation extends Component
     }
 }
 
-export default withRouter(Navigation);
+export default withRouter(Navigation);`
+}
