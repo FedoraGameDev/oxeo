@@ -57,6 +57,8 @@ installDependencies = () =>
 {
     console.log("Installing dependencies. This may take a few mintes...");
     execSync("npm i && cd frontend && npm i && cd ..");
+    console.log("Project generation complete.");
+    console.log("Run MongoDb and `node seed.js` to prepare the database.");
 }
 
 writeFile = (file, data) =>
