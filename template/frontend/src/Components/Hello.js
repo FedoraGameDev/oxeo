@@ -18,7 +18,7 @@ class Hello extends Component
 
     componentDidMount()
     {
-        axios.get(\`\${ BACKEND } \${ HELLO }\`)
+        axios.get(\`\${ BACKEND }\${ HELLO }\`)
             .then(res =>
             {
                 this.setState({ message: res.data.hello.message });
